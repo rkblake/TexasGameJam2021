@@ -1,0 +1,138 @@
+[gd_scene load_steps=6 format=2]
+
+[ext_resource path="res://assets/fonts/FutilePro.tres" type="DynamicFont" id=1]
+[ext_resource path="res://assets/fonts/FutileProLarge.tres" type="DynamicFont" id=2]
+[ext_resource path="res://scripts/Options.gd" type="Script" id=3]
+[ext_resource path="res://scripts/GrowOnHover.gd" type="Script" id=4]
+
+[sub_resource type="StyleBoxEmpty" id=1]
+
+[node name="Options" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+script = ExtResource( 3 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ColorRect" type="ColorRect" parent="."]
+modulate = Color( 0, 0, 0, 0.501961 )
+anchor_right = 1.0
+anchor_bottom = 1.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+custom_constants/margin_right = 200
+custom_constants/margin_top = 50
+custom_constants/margin_left = 200
+custom_constants/margin_bottom = 50
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ColorRect" type="ColorRect" parent="MarginContainer"]
+margin_left = 200.0
+margin_top = 50.0
+margin_right = 824.0
+margin_bottom = 590.0
+color = Color( 0.160784, 0.615686, 0.862745, 1 )
+
+[node name="MarginContainer" type="MarginContainer" parent="MarginContainer"]
+margin_left = 200.0
+margin_top = 50.0
+margin_right = 824.0
+margin_bottom = 590.0
+custom_constants/margin_right = 24
+custom_constants/margin_top = 24
+custom_constants/margin_left = 24
+custom_constants/margin_bottom = 24
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/MarginContainer"]
+margin_left = 24.0
+margin_top = 24.0
+margin_right = 600.0
+margin_bottom = 516.0
+custom_constants/separation = 24
+
+[node name="Label" type="Label" parent="MarginContainer/MarginContainer/VBoxContainer"]
+margin_right = 576.0
+margin_bottom = 56.0
+custom_fonts/font = ExtResource( 2 )
+text = "OPTIONS"
+align = 1
+
+[node name="HSeparator" type="HSeparator" parent="MarginContainer/MarginContainer/VBoxContainer"]
+margin_top = 80.0
+margin_right = 576.0
+margin_bottom = 180.0
+rect_min_size = Vector2( 0, 100 )
+custom_styles/separator = SubResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/MarginContainer/VBoxContainer"]
+margin_top = 204.0
+margin_right = 576.0
+margin_bottom = 244.0
+alignment = 1
+
+[node name="Sound" type="Label" parent="MarginContainer/MarginContainer/VBoxContainer/HBoxContainer"]
+margin_left = 198.0
+margin_top = 6.0
+margin_right = 298.0
+margin_bottom = 34.0
+custom_fonts/font = ExtResource( 1 )
+text = "Sound"
+
+[node name="SoundToggle" type="CheckButton" parent="MarginContainer/MarginContainer/VBoxContainer/HBoxContainer"]
+margin_left = 302.0
+margin_right = 378.0
+margin_bottom = 40.0
+focus_mode = 0
+enabled_focus_mode = 0
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="MarginContainer/MarginContainer/VBoxContainer"]
+margin_top = 268.0
+margin_right = 576.0
+margin_bottom = 308.0
+alignment = 1
+
+[node name="FullScreen" type="Label" parent="MarginContainer/MarginContainer/VBoxContainer/HBoxContainer2"]
+margin_left = 160.0
+margin_top = 6.0
+margin_right = 336.0
+margin_bottom = 34.0
+custom_fonts/font = ExtResource( 1 )
+text = "Fullscreen"
+
+[node name="FullscreenToggle" type="CheckButton" parent="MarginContainer/MarginContainer/VBoxContainer/HBoxContainer2"]
+margin_left = 340.0
+margin_right = 416.0
+margin_bottom = 40.0
+focus_mode = 0
+size_flags_horizontal = 0
+enabled_focus_mode = 0
+
+[node name="Button" type="Button" parent="MarginContainer/MarginContainer/VBoxContainer"]
+margin_top = 458.0
+margin_right = 576.0
+margin_bottom = 492.0
+rect_pivot_offset = Vector2( 288, 17 )
+focus_mode = 0
+size_flags_vertical = 10
+custom_fonts/font = ExtResource( 1 )
+enabled_focus_mode = 0
+text = "BACK"
+flat = true
+
+[node name="GrowOnHover" type="Node" parent="MarginContainer/MarginContainer/VBoxContainer/Button"]
+script = ExtResource( 4 )
+
+[connection signal="toggled" from="MarginContainer/MarginContainer/VBoxContainer/HBoxContainer/SoundToggle" to="." method="_on_SoundToggle_toggled"]
+[connection signal="toggled" from="MarginContainer/MarginContainer/VBoxContainer/HBoxContainer2/FullscreenToggle" to="." method="_on_FullscreenToggle_toggled"]
+[connection signal="pressed" from="MarginContainer/MarginContainer/VBoxContainer/Button" to="." method="_on_Button_pressed"]

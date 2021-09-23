@@ -1,16 +1,21 @@
 extends Node
 
+onready var options_scene: PackedScene = preload('res://scenes/Options.tscn')
+export var game_scene: PackedScene
 
-# Declare member variables here. Examples:
-# var a = 2
-# var b = "text"
-
-
-# Called when the node enters the scene tree for the first time.
 func _ready():
 	pass # Replace with function body.
 
 
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-#func _process(delta):
-#	pass
+func _on_Options_pressed():
+	var options = options_scene.instance()
+	add_child(options)
+
+
+func _on_Start_pressed():
+	if game_scene:
+		get_tree().change_scene_to(game_scene)
+
+
+func _on_Quit_pressed():
+	get_tree().quit()
