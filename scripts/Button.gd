@@ -12,11 +12,13 @@ func _ready():
 
 
 func _on_Center_body_entered(body):
+	$AnimatedSprite.animation = 'press'
 	emit_signal('button_pressed', self)
 	obstacle.disable(true)
 
 
 func _on_Center_body_exited(body):
+	$AnimatedSprite.animation = 'idle'
 	emit_signal('button_released', self)
 	obstacle.disable(false)
 

@@ -7,6 +7,9 @@
 radius = 9.16892
 
 [node name="Mouse" type="RigidBody2D"]
+gravity_scale = 2.88
+linear_damp = 0.53
+angular_damp = 3.077
 script = ExtResource( 2 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
