@@ -1,11 +1,11 @@
 extends Control
 
 func _ready():
-	pass
+	$MarginContainer/MarginContainer/VBoxContainer/HBoxContainer2/FullscreenToggle.pressed = OS.window_fullscreen
 
 
 func _on_SoundToggle_toggled(button_pressed):
-	pass # Replace with function body.
+	pass
 
 
 func _on_FullscreenToggle_toggled(button_pressed):
