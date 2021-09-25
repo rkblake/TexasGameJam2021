@@ -1,7 +1,9 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=9 format=2]
 
 [ext_resource path="res://scripts/Game.gd" type="Script" id=1]
 [ext_resource path="res://scenes/Coin.tscn" type="PackedScene" id=2]
+[ext_resource path="res://scenes/Button.tscn" type="PackedScene" id=3]
+[ext_resource path="res://scenes/Mouse.tscn" type="PackedScene" id=4]
 
 [sub_resource type="PhysicsMaterial" id=3]
 friction = 0.36
@@ -57,3 +59,12 @@ __meta__ = {
 
 [node name="Coin" parent="." instance=ExtResource( 2 )]
 position = Vector2( 560.615, 477.538 )
+
+[node name="Button" parent="." instance=ExtResource( 3 )]
+position = Vector2( 137, 364 )
+
+[node name="Mouse" parent="." instance=ExtResource( 4 )]
+position = Vector2( 168, 186 )
+collision_layer = 3
+
+[connection signal="button_entered" from="Button" to="." method="_on_Button_button_entered"]
