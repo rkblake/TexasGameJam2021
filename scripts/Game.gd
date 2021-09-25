@@ -8,6 +8,6 @@ func _ready():
 
 func _input(event) -> void:
 	if Input.is_action_just_pressed('ui_cancel'):
-		#TODO pause all physics objects
+		#TODO pause all physics objects, put them all in a group
 		var options = options_scene.instance()
 		$GUI.add_child(options)
