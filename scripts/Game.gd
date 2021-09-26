@@ -33,9 +33,12 @@ func _physics_process(delta):
 
 func _input(event) -> void:
 	if Input.is_action_just_pressed('ui_cancel'):
-		#TODO pause all physics objects, put them all in a group
+#		for objects in get_tree().get_nodes_in_group('Physics'):
+#			objects.sleeping = true
+		get_tree().paused = true
 		var options = options_scene.instance()
 		$GUI.add_child(options)
+		options.connect('close_options', self, '_on_Options_close_options')
 
 
 func _on_Button_button_entered(button):
@@ -57,4 +60,10 @@ func _on_Button_button_released(button):
 
 func _on_Coin_touch_coin():
 	coins += 1
-	$GUI/Label.text = "Coins: %s" % coins
+	$GUI/Panel/Label.text = "Coins: %s" % coins
+
+
+func _on_Options_close_options():
+#	for objects in get_tree().get_nodes_in_group('Physics'):
+#		objects.sleeping = false
+	get_tree().paused = false

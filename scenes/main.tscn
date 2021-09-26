@@ -1,12 +1,16 @@
-[gd_scene load_steps=9 format=2]
+[gd_scene load_steps=12 format=2]
 
 [ext_resource path="res://scripts/main.gd" type="Script" id=1]
 [ext_resource path="res://assets/fonts/FutilePro.tres" type="DynamicFont" id=2]
 [ext_resource path="res://assets/fonts/FutileProLarge.tres" type="DynamicFont" id=3]
-[ext_resource path="res://icon.png" type="Texture" id=4]
+[ext_resource path="res://assets/ArtAssets/Mouse_Idle.tres" type="Texture" id=4]
 [ext_resource path="res://scripts/Swivel.gd" type="Script" id=5]
 [ext_resource path="res://scripts/GrowOnHover.gd" type="Script" id=6]
 [ext_resource path="res://scenes/Game.tscn" type="PackedScene" id=7]
+[ext_resource path="res://assets/ArtAssets/MousePet.tres" type="Texture" id=8]
+[ext_resource path="res://assets/sprites/lighter_background.jpg" type="Texture" id=9]
+
+[sub_resource type="ShaderMaterial" id=2]
 
 [sub_resource type="StyleBoxEmpty" id=1]
 
@@ -18,11 +22,15 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 game_scene = ExtResource( 7 )
+mouse_pet = ExtResource( 8 )
+mouse_idle = ExtResource( 4 )
 
-[node name="ColorRect" type="ColorRect" parent="."]
+[node name="Background" type="TextureRect" parent="."]
+material = SubResource( 2 )
 anchor_right = 1.0
 anchor_bottom = 1.0
-color = Color( 0.298039, 0.0509804, 0.0509804, 1 )
+texture = ExtResource( 9 )
+stretch_mode = 2
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -43,7 +51,7 @@ margin_left = 32.0
 margin_top = 32.0
 margin_right = 992.0
 margin_bottom = 608.0
-color = Color( 0.2, 0.215686, 0.380392, 1 )
+color = Color( 0, 0, 0, 0.596078 )
 
 [node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer"]
 margin_left = 32.0
@@ -130,12 +138,14 @@ margin_bottom = 576.0
 size_flags_horizontal = 3
 
 [node name="TextureRect" type="TextureRect" parent="MarginContainer/HBoxContainer/CenterContainer"]
-margin_left = 207.0
-margin_top = 256.0
-margin_right = 271.0
-margin_bottom = 320.0
-rect_pivot_offset = Vector2( 32, 32 )
+margin_left = 79.0
+margin_top = 128.0
+margin_right = 399.0
+margin_bottom = 448.0
+rect_min_size = Vector2( 320, 320 )
+rect_pivot_offset = Vector2( 160, 160 )
 texture = ExtResource( 4 )
+expand = true
 
 [node name="SwivelEffect" type="Node" parent="MarginContainer/HBoxContainer/CenterContainer/TextureRect"]
 script = ExtResource( 5 )
@@ -143,3 +153,5 @@ script = ExtResource( 5 )
 [connection signal="pressed" from="MarginContainer/HBoxContainer/VBoxContainer/Start" to="." method="_on_Start_pressed"]
 [connection signal="pressed" from="MarginContainer/HBoxContainer/VBoxContainer/Options" to="." method="_on_Options_pressed"]
 [connection signal="pressed" from="MarginContainer/HBoxContainer/VBoxContainer/Quit" to="." method="_on_Quit_pressed"]
+[connection signal="gui_input" from="MarginContainer/HBoxContainer/CenterContainer/TextureRect" to="." method="_on_TextureRect_gui_input"]
+[connection signal="mouse_exited" from="MarginContainer/HBoxContainer/CenterContainer/TextureRect" to="." method="_on_TextureRect_mouse_exited"]

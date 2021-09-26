@@ -7,7 +7,7 @@
 radius = 21.4297
 
 [sub_resource type="CircleShape2D" id=2]
-radius = 37.8888
+radius = 27.0539
 
 [node name="Button" type="Node2D" groups=[
 "Button",
@@ -27,7 +27,7 @@ collision_mask = 2
 shape = SubResource( 2 )
 
 [node name="AnimatedSprite" type="AnimatedSprite" parent="."]
-scale = Vector2( 2, 2 )
+scale = Vector2( 3, 3 )
 frames = ExtResource( 2 )
 animation = "idle"
 playing = true

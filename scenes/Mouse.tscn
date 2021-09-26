@@ -4,7 +4,7 @@
 [ext_resource path="res://scripts/Mouse.gd" type="Script" id=2]
 
 [sub_resource type="CircleShape2D" id=1]
-radius = 9.16892
+radius = 18.9813
 
 [node name="Mouse" type="RigidBody2D"]
 gravity_scale = 2.88
@@ -12,13 +12,14 @@ linear_damp = 0.53
 angular_damp = 3.077
 script = ExtResource( 2 )
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-shape = SubResource( 1 )
-
 [node name="AnimatedSprite" type="AnimatedSprite" parent="."]
 position = Vector2( -0.951141, 0.481651 )
+scale = Vector2( 2, 2 )
 frames = ExtResource( 1 )
 animation = "Idle"
-frame = 3
+frame = 1
 playing = true
 offset = Vector2( 2, -5 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource( 1 )

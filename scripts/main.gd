@@ -2,6 +2,8 @@ extends Node
 
 onready var options_scene: PackedScene = preload('res://scenes/Options.tscn')
 export var game_scene: PackedScene
+export var mouse_pet: AnimatedTexture
+export var mouse_idle: AnimatedTexture
 
 func _ready():
 	pass # Replace with function body.
@@ -19,3 +21,12 @@ func _on_Start_pressed():
 
 func _on_Quit_pressed():
 	get_tree().quit()
+
+
+func _on_TextureRect_gui_input(event):
+	if event is InputEventMouseButton and event.pressed:
+		$MarginContainer/HBoxContainer/CenterContainer/TextureRect.texture = mouse_pet
+
+
+func _on_TextureRect_mouse_exited():
+	$MarginContainer/HBoxContainer/CenterContainer/TextureRect.texture = mouse_idle
