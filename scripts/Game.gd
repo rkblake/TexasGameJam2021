@@ -1,6 +1,8 @@
 extends Node2D
 
 onready var options_scene: PackedScene = preload('res://scenes/Options.tscn')
+onready var marble_scene: PackedScene = preload('res://scenes/Marble.tscn')
+onready var marble = $Marble
 
 #const GRAVITY = 800
 var is_in_button := false
@@ -16,13 +18,17 @@ func _ready():
 	
 	for coin in get_tree().get_nodes_in_group('Coin'):
 		coin.connect('touch_coin', self, '_on_Coin_touch_coin')
+	
+	$MarbleDetector.connect('object_teleport', self, '_on_object_teleport')
+	$Area2D.connect('object_teleport', self, '_on_object_teleport')
+	$Area2D3.connect('object_teleport', self, '_on_object_teleport')
 
 
 func _physics_process(delta):
-	if is_in_button and Input.is_action_pressed('ui_select'):
+	if is_in_button and (Input.is_action_pressed('push_button') or $GUI/Button.pressed):
 		$Mouse.sleeping = true
-		$Mouse.position.linear_interpolate(_button.position, 0.5)
-	if is_in_button and Input.is_action_just_released('ui_select'):
+#		$Mouse.position.linear_interpolate(_button.position, 0.5)
+	if is_in_button and (Input.is_action_just_released('push_button') or $GUI/Button.pressed):
 		$Mouse.sleeping = false
 #		var distance := Vector2(_button.position - $Mouse.position)
 #		var force := GRAVITY / distance.length_squared()
@@ -51,7 +57,7 @@ func _on_Button_button_exited(button):
 
 
 func _on_Button_button_pressed(button):
-	$Marble.add_central_force(Vector2(0, 200)) #need force to get ball rolling again
+	marble.add_central_force(Vector2(0, 200)) #need force to get ball rolling again
 
 
 func _on_Button_button_released(button):
@@ -67,3 +73,15 @@ func _on_Options_close_options():
 #	for objects in get_tree().get_nodes_in_group('Physics'):
 #		objects.sleeping = false
 	get_tree().paused = false
+
+
+func _on_object_teleport(obj):
+	if obj is Marble:
+		marble.queue_free()
+		var new_marble = marble_scene.instance()
+		new_marble.position = Vector2(600, -126)
+		new_marble.name = 'Marble'
+		add_child(new_marble)
+		marble = new_marble
+	elif obj is Mouse:
+		$Mouse/Camera2D.offset_h *= -1

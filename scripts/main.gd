@@ -1,7 +1,7 @@
 extends Node
 
 onready var options_scene: PackedScene = preload('res://scenes/Options.tscn')
-export var game_scene: PackedScene
+export var next_scene: PackedScene
 export var mouse_pet: AnimatedTexture
 export var mouse_idle: AnimatedTexture
 
@@ -15,8 +15,8 @@ func _on_Options_pressed():
 
 
 func _on_Start_pressed():
-	if game_scene:
-		get_tree().change_scene_to(game_scene)
+	if next_scene:
+		get_tree().change_scene_to(next_scene)
 
 
 func _on_Quit_pressed():

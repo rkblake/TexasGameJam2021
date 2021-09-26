@@ -1,3 +1,4 @@
+class_name Mouse
 extends RigidBody2D
 
 func _ready():

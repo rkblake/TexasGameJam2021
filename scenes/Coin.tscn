@@ -1,7 +1,8 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://scripts/Coin.gd" type="Script" id=1]
 [ext_resource path="res://assets/ArtAssets/Coin.tres" type="SpriteFrames" id=2]
+[ext_resource path="res://assets/sounds/coin.wav" type="AudioStream" id=3]
 
 [sub_resource type="CircleShape2D" id=1]
 radius = 20.2383
@@ -16,6 +17,7 @@ position = Vector2( 1.04056, -5.79739 )
 scale = Vector2( 4, 4 )
 frames = ExtResource( 2 )
 animation = "idle"
+frame = 1
 playing = true
 
 [node name="StaticBody2D" type="Area2D" parent="."]
@@ -23,6 +25,10 @@ playing = true
 [node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
 shape = SubResource( 1 )
 
-[node name="Tween" type="Tween" parent="."]
+[node name="Timer" type="Timer" parent="."]
+wait_time = 5.0
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 3 )
 
 [connection signal="body_entered" from="StaticBody2D" to="." method="_on_StaticBody2D_body_entered"]

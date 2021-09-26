@@ -1,4 +1,4 @@
-[gd_scene load_steps=27 format=2]
+[gd_scene load_steps=26 format=2]
 
 [ext_resource path="res://scripts/Game.gd" type="Script" id=1]
 [ext_resource path="res://scenes/Coin.tscn" type="PackedScene" id=2]
@@ -7,17 +7,11 @@
 [ext_resource path="res://scenes/Obstacle.tscn" type="PackedScene" id=5]
 [ext_resource path="res://assets/fonts/FutilePro.tres" type="DynamicFont" id=6]
 [ext_resource path="res://assets/sprites/floor_sprite.png" type="Texture" id=7]
-[ext_resource path="res://assets/ArtAssets/Marble_Animation 1_0.png" type="Texture" id=8]
+[ext_resource path="res://scenes/Marble.tscn" type="PackedScene" id=8]
 [ext_resource path="res://assets/sprites/lighter_background.jpg" type="Texture" id=9]
 [ext_resource path="res://scripts/Teleport.gd" type="Script" id=10]
 [ext_resource path="res://scenes/UIPanel.tscn" type="PackedScene" id=11]
-
-[sub_resource type="PhysicsMaterial" id=3]
-friction = 0.73
-bounce = 0.18
-
-[sub_resource type="CircleShape2D" id=2]
-radius = 28.337
+[ext_resource path="res://assets/sounds/blip.wav" type="AudioStream" id=12]
 
 [sub_resource type="PhysicsMaterial" id=4]
 friction = 0.5
@@ -171,27 +165,15 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Marble" type="RigidBody2D" parent="." groups=[
-"Physics",
-]]
-position = Vector2( 600, -126 )
-collision_layer = 3
-physics_material_override = SubResource( 3 )
-gravity_scale = 2.0
+[node name="Button" type="Button" parent="GUI"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+flat = true
 __meta__ = {
-"_edit_group_": true
+"_edit_use_anchors_": false
 }
 
-[node name="Sprite" type="Sprite" parent="Marble"]
-position = Vector2( -0.472534, 0.629959 )
-scale = Vector2( 2, 2 )
-texture = ExtResource( 8 )
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Marble"]
-shape = SubResource( 2 )
-
-[node name="Coin" parent="." instance=ExtResource( 2 )]
-position = Vector2( 589.637, 106.889 )
+[node name="Marble" parent="." instance=ExtResource( 8 )]
 
 [node name="LeftWalls" type="Node2D" parent="."]
 __meta__ = {
@@ -790,9 +772,6 @@ __meta__ = {
 
 [node name="MiddleWalls" type="Node2D" parent="."]
 position = Vector2( 541.027, 0 )
-__meta__ = {
-"_edit_group_": true
-}
 
 [node name="StaticBody2D3" type="StaticBody2D" parent="MiddleWalls"]
 position = Vector2( 149.343, 246.394 )
@@ -814,19 +793,19 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="StaticBody2D28" type="StaticBody2D" parent="MiddleWalls"]
-position = Vector2( -1.06686, -57.7935 )
+[node name="StaticBody2D29" type="StaticBody2D" parent="MiddleWalls"]
+position = Vector2( 149.343, 246.394 )
 rotation = 1.5708
 physics_material_override = SubResource( 4 )
 __meta__ = {
 "_edit_group_": true
 }
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="MiddleWalls/StaticBody2D28"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="MiddleWalls/StaticBody2D29"]
 position = Vector2( 101.749, 20.5051 )
 shape = SubResource( 1 )
 
-[node name="ColorRect" type="ColorRect" parent="MiddleWalls/StaticBody2D28"]
+[node name="ColorRect" type="ColorRect" parent="MiddleWalls/StaticBody2D29"]
 material = SubResource( 8 )
 margin_right = 204.0
 margin_bottom = 42.0
@@ -2002,6 +1981,16 @@ position = Vector2( 726.082, 1094.23 )
 rotation = 1.5708
 scale = Vector2( 1, 1 )
 
+[node name="Obstacle5" parent="Obstacles" instance=ExtResource( 5 )]
+position = Vector2( 801.385, 763.449 )
+rotation = -0.785398
+scale = Vector2( 1, 1 )
+
+[node name="Obstacle6" parent="Obstacles" instance=ExtResource( 5 )]
+position = Vector2( 613.683, 910.38 )
+rotation = 0.785398
+scale = Vector2( 1, 1 )
+
 [node name="Buttons" type="Node2D" parent="."]
 
 [node name="Button" parent="Buttons" instance=ExtResource( 3 )]
@@ -2020,19 +2009,45 @@ obstacle_path = NodePath("../../Obstacles/Obstacle3")
 position = Vector2( 1257.09, 546.575 )
 obstacle_path = NodePath("../../Obstacles/Obstacle2")
 
+[node name="Button5" parent="Buttons" instance=ExtResource( 3 )]
+position = Vector2( 1346.89, 777.802 )
+obstacle_path = NodePath("../../Obstacles/Obstacle5")
+
+[node name="Button6" parent="Buttons" instance=ExtResource( 3 )]
+position = Vector2( 1171.59, 932.128 )
+obstacle_path = NodePath("../../Obstacles/Obstacle6")
+
 [node name="Area2D" type="Area2D" parent="."]
 position = Vector2( 183.836, 1195.3 )
 script = ExtResource( 10 )
 __meta__ = {
 "_edit_group_": true
 }
-new_pos = Vector2( 50, -126 )
+new_pos = Vector2( 1150, -126 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
 shape = SubResource( 16 )
 
-[node name="Area2D2" type="Area2D" parent="."]
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="Area2D"]
+stream = ExtResource( 12 )
+
+[node name="Area2D3" type="Area2D" parent="."]
+position = Vector2( 1265.84, 1205.3 )
+script = ExtResource( 10 )
+__meta__ = {
+"_edit_group_": true
+}
+new_pos = Vector2( 50, -126 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D3"]
+shape = SubResource( 16 )
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="Area2D3"]
+stream = ExtResource( 12 )
+
+[node name="MarbleDetector" type="Area2D" parent="."]
 position = Vector2( 724.634, 1218.77 )
+collision_layer = 3
 collision_mask = 3
 script = ExtResource( 10 )
 __meta__ = {
@@ -2040,7 +2055,7 @@ __meta__ = {
 }
 new_pos = Vector2( 600, -126 )
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D2"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="MarbleDetector"]
 shape = SubResource( 16 )
 
 [node name="Mouse" parent="." groups=[
@@ -2056,11 +2071,33 @@ current = true
 zoom = Vector2( 1.2, 1.2 )
 drag_margin_h_enabled = true
 drag_margin_v_enabled = true
+smoothing_enabled = true
 offset_h = 1.0
 drag_margin_left = 0.8
-drag_margin_right = 0.8
+drag_margin_right = 0.6
 editor_draw_limits = true
 editor_draw_drag_margin = true
 
+[node name="Coins" type="Node2D" parent="."]
+
+[node name="Coin" parent="Coins" instance=ExtResource( 2 )]
+position = Vector2( 589.637, 106.889 )
+
+[node name="Coin2" parent="Coins" instance=ExtResource( 2 )]
+position = Vector2( 943.497, 520.08 )
+
+[node name="Coin3" parent="Coins" instance=ExtResource( 2 )]
+position = Vector2( 596.485, 577.291 )
+
+[node name="Coin4" parent="Coins" instance=ExtResource( 2 )]
+position = Vector2( 716.485, 631.291 )
+
+[node name="Coin5" parent="Coins" instance=ExtResource( 2 )]
+position = Vector2( 546.485, 847.291 )
+
+[node name="Coin6" parent="Coins" instance=ExtResource( 2 )]
+position = Vector2( 721.485, 1146.29 )
+
 [connection signal="body_entered" from="Area2D" to="Area2D" method="_on_Area2D_body_entered"]
-[connection signal="body_entered" from="Area2D2" to="Area2D2" method="_on_Area2D_body_entered"]
+[connection signal="body_entered" from="Area2D3" to="Area2D3" method="_on_Area2D_body_entered"]
+[connection signal="body_entered" from="MarbleDetector" to="MarbleDetector" method="_on_Area2D_body_entered"]
